@@ -2,6 +2,11 @@
 //from http://pastebin.com/aNkSZWCF
 #include <SDL/SDL.h>
 #include <cmath>
+#include <stdlib.h>
+
+#if EMSCRIPTEN
+#include <emscripten.h>
+#endif
 
 SDL_Surface* screen;
 const int SCREEN_WIDTH = 640;
@@ -32,6 +37,10 @@ inline float getMagnitude(complexNumber b)
 }
 
 void frame() {
+    static int frames = 0;
+    frames++;
+    if (frames == 60) exit(1);
+
     SDL_LockSurface(screen);
 
     int *pixels = (int*)screen->pixels;
@@ -74,7 +83,6 @@ void frame() {
     SDL_UnlockSurface(screen);
 #if !EMSCRIPTEN
     SDL_Flip(screen);
-    SDL_Delay(3000);
 #endif
  }
 
@@ -84,7 +92,15 @@ int main(int argc, char* argv[])
   screen = SDL_SetVideoMode(SCREEN_WIDTH,SCREEN_HEIGHT,SCREEN_BPP,SDL_HWSURFACE);
   SDL_WM_SetCaption("Mandelbrot set in C++",NULL);
 
-  frame();
+#if EMSCRIPTEN
+  emscripten_set_main_loop(frame, 0, 0);
+#else
+  while (1) {
+    frame();
+    //SDL_Delay(1);
+  }
+#endif
 
   return 0;
 }
+
