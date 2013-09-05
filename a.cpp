@@ -25,10 +25,6 @@ struct complexNumber
     float imag;
 };
 
-int i,j,count;
-float delta = (Re_max - Re_min)/SCREEN_WIDTH;
-
-complexNumber z,xlast,xcurr;
 int N = 20; //N = max iterations
 
 inline float getMagnitude(complexNumber b)
@@ -41,9 +37,18 @@ void frame() {
     frames++;
     if (frames == 60) exit(1);
 
+float Re_max = 1.0 + float(frames)/60.0;
+float Re_min = -2.5;
+float Im_min = -1.0 - float(frames)/60.0;
+float Im_max = 1.0;
+float delta = (Re_max - Re_min)/SCREEN_WIDTH;
+complexNumber z,xlast,xcurr;
+
     SDL_LockSurface(screen);
 
     int *pixels = (int*)screen->pixels;
+
+    int i,j,count;
 
     //Checks all values on the screen in sync with all values on the Real/Imaginary axis
     for(i=0,z.real = Re_min; i<SCREEN_WIDTH; i++,z.real+=delta)
