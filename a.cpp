@@ -26,17 +26,12 @@ float delta = (Re_max - Re_min)/SCREEN_WIDTH;
 complexNumber z,xlast,xcurr;
 int N = 20; //N = max iterations
 
-float getMagnitude(complexNumber b)
+inline float getMagnitude(complexNumber b)
 {
     return (sqrt(b.real*b.real + b.imag*b.imag));
 }
 
-int main(int argc, char* argv[])
-{
-    SDL_Init(SDL_INIT_VIDEO);
-    screen = SDL_SetVideoMode(SCREEN_WIDTH,SCREEN_HEIGHT,SCREEN_BPP,SDL_HWSURFACE);
-    SDL_WM_SetCaption("Mandelbrot set in C++",NULL);
-
+void frame() {
     SDL_LockSurface(screen);
 
     int *pixels = (int*)screen->pixels;
@@ -81,5 +76,15 @@ int main(int argc, char* argv[])
     SDL_Flip(screen);
     SDL_Delay(3000);
 #endif
-    return 0;
+ }
+
+int main(int argc, char* argv[])
+{
+  SDL_Init(SDL_INIT_VIDEO);
+  screen = SDL_SetVideoMode(SCREEN_WIDTH,SCREEN_HEIGHT,SCREEN_BPP,SDL_HWSURFACE);
+  SDL_WM_SetCaption("Mandelbrot set in C++",NULL);
+
+  frame();
+
+  return 0;
 }
