@@ -14,18 +14,13 @@ const int SCREEN_HEIGHT = 480;
 const int SCREEN_BPP = 32;
 SDL_Event keypress;
 
-float Re_max = 1.0;
-float Re_min = -2.5;
-float Im_min = -1.0;
-float Im_max = 1.0;
-
 struct complexNumber
 {
     float real;
     float imag;
 };
 
-int N = 20; //N = max iterations
+int N = 30; //N = max iterations
 
 inline float getMagnitude(complexNumber b)
 {
@@ -35,14 +30,15 @@ inline float getMagnitude(complexNumber b)
 void frame() {
     static int frames = 0;
     frames++;
-    if (frames == 60) exit(1);
-
-float Re_max = 1.0 + float(frames)/60.0;
-float Re_min = -2.5;
-float Im_min = -1.0 - float(frames)/60.0;
-float Im_max = 1.0;
-float delta = (Re_max - Re_min)/SCREEN_WIDTH;
-complexNumber z,xlast,xcurr;
+    if (frames == 80) exit(1);
+  
+    float t = float(frames)/40.0;
+    float Re_max = 1.0 - t;
+    float Re_min = -2.5 + t;
+    float Im_min = -1.0 + t/3;
+    float Im_max = 1.0 - t;
+    float delta = (Re_max - Re_min)/SCREEN_WIDTH;
+    complexNumber z,xlast,xcurr;
 
     SDL_LockSurface(screen);
 
