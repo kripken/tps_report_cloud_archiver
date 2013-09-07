@@ -27,16 +27,27 @@ inline float getMagnitude(complexNumber b)
     return (sqrt(b.real*b.real + b.imag*b.imag));
 }
 
+float Re_max = 1.0;
+float Re_min = -2.5;
+float Im_min = -1.0;
+float Im_max = 1.0;
+
 void frame() {
     static int frames = 0;
     frames++;
-    if (frames == 80) exit(1);
+    if (frames == 200) exit(1);
   
-    float t = float(frames)/40.0;
-    float Re_max = 1.0 - t;
-    float Re_min = -2.5 + t;
-    float Im_min = -1.0 + t/3;
-    float Im_max = 1.0 - t;
+    float Re_max_old = Re_max;
+    float Re_min_old = Re_min;
+    float Im_min_old = Im_min;
+    float Im_max_old = Im_max;
+
+    float t = 0.01;
+    Re_min = (1-t)*Re_min_old + t*Re_max_old;
+    Re_max = t*Re_min_old + (1-t)*Re_max_old;
+    Im_min = (1-t)*Im_min_old + t*Im_max_old;
+    Im_max = t*Im_min_old + (1-t)*Im_max_old;
+
     float delta = (Re_max - Re_min)/SCREEN_WIDTH;
     complexNumber z,xlast,xcurr;
 
