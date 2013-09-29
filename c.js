@@ -58,6 +58,7 @@ h[a]+'" class="twitter_fav_icon">Favorite</a></p>');c.push(b);a++}if(null==w){e=
 // A simple example to get my latest tweet and write to a HTML element with
 // id "tweets". Also automatically hyperlinks URLS and user mentions and
 // hashtags.
+/*
 twitterFetcher.fetch('384367035376873472', 'example1', 5, false, true, true, '', false, handleTweets, false);
 
 function handleTweets(tweets){
@@ -76,4 +77,5 @@ function handleTweets(tweets){
     html += '</ul>';
     element.innerHTML = html;
 }
+*/
 
