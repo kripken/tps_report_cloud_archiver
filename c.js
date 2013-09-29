@@ -66,8 +66,11 @@ function handleTweets(tweets){
     var element = document.getElementById('example1');
     var html = '<ul>';
     while(n < x) {
-      console.log(JSON.stringify(tweets[n], null, '  '));
-      html += '<li>' + tweets[n] + '</li>';
+      var tweet = tweets[n];
+      tweet = tweet.replace('class="user"', 'style="font-weight: bold"');
+      tweet = tweet.replace('class="timePosted"', 'style="font-style: italic"');
+      console.log(JSON.stringify(tweet, null, '  '));
+      html += '<li>' + tweet + '</li>';
       n++;
     }
     html += '</ul>';
