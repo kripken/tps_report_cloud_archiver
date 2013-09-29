@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <body>
-<p><canvas id="canvas" style="border:2px solid black;" width="200" height="200"></canvas>
+<p><canvas id="canvas" style="border:2px solid black;" width="256" height="256"></canvas>
 <script>
 
 var canvas = document.getElementById("canvas");
@@ -9,10 +9,10 @@ var ctx = canvas.getContext("2d");
 
 function render(text) {
   canvas.width = canvas.width
-  var data = "<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'>" +
+  var data = "<svg xmlns='http://www.w3.org/2000/svg' width='256' height='256'>" +
                "<foreignObject width='100%' height='100%'>" +
-                 "<div xmlns='http://www.w3.org/1999/xhtml' style='font-size:40px'>" +
-                   "<span style='color:white; text-shadow:0 0 2px blue;'>" + text + "</span>" +
+                 "<div xmlns='http://www.w3.org/1999/xhtml' style='font-size:20px; margin: 10px'>" +
+                   "<span>" + text + "</span>" + //  style='color:white; text-shadow:0 0 2px blue;'
                  "</div>" +
                "</foreignObject>" +
              "</svg>";
@@ -27,11 +27,9 @@ function render(text) {
   img.src = url;
 }
 
-var text = '';
 setInterval(function() {
-  text += Math.random().toString()[3];
+  var text = '<h2>Title</h2><ul><li>item1</li><li>item2</li></ul><p>moar</p>';
   render(text);
-  if (text.length == 7) text = '';
 }, 300);
 
 </script>
