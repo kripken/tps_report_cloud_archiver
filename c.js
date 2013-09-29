@@ -58,48 +58,15 @@ h[a]+'" class="twitter_fav_icon">Favorite</a></p>');c.push(b);a++}if(null==w){e=
 // A simple example to get my latest tweet and write to a HTML element with
 // id "tweets". Also automatically hyperlinks URLS and user mentions and
 // hashtags.
-twitterFetcher.fetch('384367035376873472', 'example1', 5);
-
-/*
-// ##### Simple example 2 #####
-// A simple example to get my latest 5 of my favourite tweets and write to a HTML
-// element with id "talk". Also automatically hyperlinks URLS and user mentions and
-// hashtags but does not display time of post.
-twitterFetcher.fetch('384367035376873472', 'example2', 5, true, true, false);
-
-
-// ##### Advanced example #####
-// An advance example to get latest 5 posts using hashtag #API and write to a
-// HTML element with id "tweets2" without showing user details and using a
-// custom format to display the date/time of the post, and does not show
-// retweets.
-twitterFetcher.fetch('384367035376873472', 'example3', 3, true, false, true, dateFormatter, false);
-
-// For advanced example which allows you to customize how tweet time is
-// formatted you simply define a function which takes a JavaScript date as a
-// parameter and returns a string!
-// See http://www.w3schools.com/jsref/jsref_obj_date.asp for properties
-// of a Date object.
-function dateFormatter(date) {
-  return date.toTimeString();
-}
-
-
-// ##### Advanced example 2 #####
-// Similar as previous, except this time we pass a custom function to render the
-// tweets ourself! Useful if you need to know exactly when data has returned or
-// if you need full control over the output.
-alert('1');
-twitterFetcher.fetch('384367035376873472', 'example4', 3, true, true, true, '', false, handleTweets, false);
-alert('2');
-*/
+twitterFetcher.fetch('384367035376873472', 'example1', 5, false, true, true, '', false, handleTweets, false);
 
 function handleTweets(tweets){
     var x = tweets.length;
     var n = 0;
-    var element = document.getElementById('example4');
+    var element = document.getElementById('example1');
     var html = '<ul>';
     while(n < x) {
+      console.log(JSON.stringify(tweets[n], null, '  '));
       html += '<li>' + tweets[n] + '</li>';
       n++;
     }
