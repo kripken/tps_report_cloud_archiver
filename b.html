@@ -32,16 +32,16 @@ function getTweets(callback) {
   function handleTweets(tweets){
     var x = tweets.length;
     var n = 0;
-    var html = '<ul>';
+    var html = '';
     while(n < x) {
       var tweet = tweets[n];
       tweet = tweet.replace('class="user"', 'style="font-weight: bold"');
       tweet = tweet.replace('class="timePosted"', 'style="font-style: italic"');
       console.log(JSON.stringify(tweet, null, '  '));
-      html += '<li>' + tweet + '</li>';
+      html += '<p>' + tweet + '</p><hr></hr>';
       n++;
     }
-    html += '</ul>';
+    html += '';
     callback(html);
   }
   twitterFetcher.fetch('384367035376873472', 'example1', 5, false, true, true, '', false, handleTweets, false);
